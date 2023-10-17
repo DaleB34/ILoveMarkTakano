@@ -4,6 +4,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,8 +24,8 @@ public class BlankFragment extends Fragment implements OnMapReadyCallback {
 
 
     //widgets
-    private RecyclerView recyclerView;
-    private MapView mapView;
+    public MapView mapView;
+    public View view;
 
 
     //uhhh i don't know what this is for
@@ -35,19 +36,14 @@ public class BlankFragment extends Fragment implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_blank, container, false);
-        recyclerView = view.findViewById(R.id.user_list_recycler_view);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_blank, container, false);
         mapView = view.findViewById(R.id.user_list_map);
         initGoogleMap(savedInstanceState);
 
-        Bundle mapViewBundle = null;
-        if(savedInstanceState != null)
-            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
-        mapView.onCreate(mapViewBundle);
-        mapView.getMapAsync(this);
 
         return view;
     }
